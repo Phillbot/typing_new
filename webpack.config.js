@@ -17,7 +17,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html',
+            template: './src/index.html',
         }),
 
         // Add your plugins here
@@ -39,8 +39,7 @@ const config = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                mode: 'local',
-                                localIdentName: isProduction ? '[local]-[hash:base64:6]' : '[local]--[hash:base64:5]',
+                                localIdentName: isProduction ? '[local]-[hash:base64:6]' : '[local]--[hash:base64:6]',
                             },
                         },
                     },
