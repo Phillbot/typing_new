@@ -1,6 +1,6 @@
 const TYPES = {
-  INumberUpdate: Symbol.for("INumberUpdate"),
-  ICalc: Symbol.for("ICalc"),
+    INumberUpdate: Symbol.for('INumberUpdate'),
+    ICalc: Symbol.for('ICalc'),
 };
 
 export { TYPES };
