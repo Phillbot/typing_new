@@ -40,7 +40,7 @@ const config = {
                         options: {
                             modules: {
                                 mode: 'local',
-                                localIdentName: isProduction ? '[local]-[hash:base64:6]' : '[name]-[local]--[hash:base64:5]',
+                                localIdentName: isProduction ? '[local]-[hash:base64:6]' : '[local]--[hash:base64:5]',
                             },
                         },
                     },
