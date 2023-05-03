@@ -1,7 +1,22 @@
 {
     "version": "0.0.0",
-    "description": "My webpack project",
-    "name": "my-webpack-project",
+    "description": "Typing app for training program skills with OOP. Its Sandbox",
+    "name": "typing",
+    "license": "ISC",
+    "author": {
+        "email": "d.philippenko@gmail.com",
+        "name": "Phillbot"
+    },
+    "bugs": {},
+    "private": true,
+    "contributes": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Phillbot/typing_new"
+    },
+    "engines": {
+        "node": ">=16.19.1"
+    },
     "scripts": {
         "build": "webpack --mode=production --node-env=production",
         "build:dev": "webpack --mode=development",
