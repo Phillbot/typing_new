@@ -2,13 +2,16 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { SourceMapDevToolPlugin } = require('webpack');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
+    devtool: false,
     entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
     },
     devServer: {
         open: true,
@@ -19,7 +22,9 @@ const config = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
         }),
-
+        new SourceMapDevToolPlugin({
+            filename: '[file].map[query]',
+        }),
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
