@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
+        "baseUrl": "./",
         "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
-        "module": "commonjs",
+        "module": "es6",
         "target": "ES6",
         "jsx": "react",
         "noImplicitOverride": true,
@@ -10,7 +11,12 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "lib": ["es6", "dom"]
+        "lib": ["es6", "dom"],
+        "paths": {
+            "@Components/*": ["src/components/*"],
+            "@Stores/*": ["src/stores/*"],
+            "@Utils/*": ["src/utils/*"]
+        }
     },
     "include": ["./src/**/*", "declaration.d.ts"],
     "exclude": ["node_modules"]

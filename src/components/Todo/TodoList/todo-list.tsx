@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { observer } from 'mobx-react';
+import { resolve } from 'inversify-react';
 
-import { Todo, todoStore } from '../../../../stores/TodoStore';
+import TodoStore, { Todo } from '@Stores/TodoStore';
 
 import classes from './todo-list.scss';
-import classNames from 'classnames';
 
 @observer
 export default class TodoList extends Component {
+    @resolve
+    private declare readonly _todoStore: TodoStore;
+
     constructor(props: any) {
         super(props);
     }
 
     handleToggleTodo(t: Todo) {
-        todoStore.toggle(t);
+        this._todoStore.toggle(t);
     }
 
     handleRemoveTodo = (t: Todo) => {
-        todoStore.remove(t);
+        this._todoStore.remove(t);
     };
 
     override render(): React.ReactNode {
         return (
             <ul className={classes.todoList}>
-                {todoStore.list.map((t) => (
+                {this._todoStore.list.map((t) => (
                     <li key={t.id}>
                         <label
                             htmlFor={String(t.id)}

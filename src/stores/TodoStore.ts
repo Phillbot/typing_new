@@ -1,17 +1,29 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import { injectable } from 'inversify';
+import { action, autorun, makeObservable, observable } from 'mobx';
+import 'reflect-metadata';
+
+export type ITodoStore = {
+    list: Todo[];
+    add(title: string): void;
+    toggle(todo: Todo): void;
+    remove(todo: Todo): void;
+};
 
 export interface Todo {
     id: number;
     title: string;
     isDone: boolean;
 }
-
-class TodoStore {
+@injectable()
+export default class TodoStore implements ITodoStore {
     @observable
     list: Todo[] = [];
 
     constructor() {
         makeObservable(this);
+        autorun(() => {
+            console.log(this.list);
+        });
     }
 
     @action
@@ -36,13 +48,4 @@ class TodoStore {
     remove(todo: Todo) {
         this.list = this.list.filter((t) => t.id !== todo.id);
     }
-
-    @computed
-    get lists() {
-        return this.list.reduce((item) => [item, ...item], []);
-    }
 }
-
-const todoStore = new TodoStore();
-export { todoStore };
-export default TodoStore;

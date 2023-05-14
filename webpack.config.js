@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { SourceMapDevToolPlugin } = require('webpack');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -66,6 +67,11 @@ const config = {
         ],
     },
     resolve: {
+        plugins: [
+            new TsconfigPathsPlugin({
+                /* options: see below */
+            }),
+        ],
         extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
     },
 };
