@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { SourceMapDevToolPlugin } = require('webpack');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -13,6 +14,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
+        chunkFilename: '[name].chunk.bundle.js',
     },
     devServer: {
         open: true,
@@ -73,6 +75,37 @@ const config = {
             }),
         ],
         extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    format: {
+                        comments: false,
+                    },
+                },
+                extractComments: false,
+            }),
+        ],
+        splitChunks: {
+            name: (module, chunks, cacheGroupKey) => {
+                const allChunksNames = chunks.map((chunk) => chunk.name).join('-');
+                return allChunksNames;
+            },
+            cacheGroups: {
+                reactVendor: {
+                    test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+                    name: 'vendor-react',
+                    chunks: 'all',
+                },
+                corejsVendor: {
+                    test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+                    name: 'vendor-corejs',
+                    chunks: 'all',
+                },
+            },
+        },
     },
 };
 
